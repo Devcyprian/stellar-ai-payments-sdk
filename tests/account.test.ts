@@ -49,3 +49,16 @@ describe('StellarAccountHelper.minReserve', () => {
     expect(StellarAccountHelper.minReserve(2)).toBe(2);
   });
 });
+
+describe('requireXlmBalance', () => {
+  it('throws when balance is too low', async () => {
+    const helper = new StellarAccountHelper();
+    mockedAxios.get = jest.fn().mockResolvedValue({
+      data: {
+        account_id: 'GABC', sequence: '1', subentry_count: 0,
+        balances: [{ asset_type: 'native', balance: '1.0000000' }],
+      },
+    });
+    await expect(helper.requireXlmBalance('GABC', '10')).rejects.toThrow('Insufficient XLM');
+  });
+});
