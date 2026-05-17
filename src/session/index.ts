@@ -107,3 +107,8 @@ export class SessionKeyManager {
   count(): number {
     return this.listActive().length;
   }
+
+  /** Serialize active sessions to JSON (excludes secret keys). */
+  toJSON(): Array<Omit<SessionKey, 'secretKey'>> {
+    return this.listActive().map(({ secretKey: _sk, ...rest }) => rest);
+  }
