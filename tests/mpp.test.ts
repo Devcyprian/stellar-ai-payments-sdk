@@ -40,3 +40,11 @@ describe('validateSplits', () => {
     expect(result.valid).toBe(false);
   });
 });
+
+describe('calculateMppFee', () => {
+  it('multiplies base fee by split count', () => {
+    const { calculateMppFee } = require('../src/mpp');
+    expect(calculateMppFee(3)).toBe(300);
+    expect(calculateMppFee(5, 200)).toBe(1000);
+  });
+});
