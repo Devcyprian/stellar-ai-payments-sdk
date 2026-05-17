@@ -16,3 +16,14 @@ describe('MPP helpers', () => {
     expect(() => parseAsset('BADFORMAT')).toThrow('Invalid asset format');
   });
 });
+
+describe('isValidPublicKey', () => {
+  it('accepts valid G... key', () => {
+    const { isValidPublicKey } = require('../src/mpp');
+    expect(isValidPublicKey('GABC' + 'A'.repeat(52))).toBe(true);
+  });
+  it('rejects invalid key', () => {
+    const { isValidPublicKey } = require('../src/mpp');
+    expect(isValidPublicKey('SABC')).toBe(false);
+  });
+});
