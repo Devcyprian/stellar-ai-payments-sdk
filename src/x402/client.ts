@@ -109,3 +109,6 @@ export function backoffMs(attempt: number, baseMs = 200): number {
 export function validateMemo(memo: string): boolean {
   return Buffer.byteLength(memo, 'utf8') <= 28;
 }
+
+/** Default request timeout in milliseconds. */
+export const DEFAULT_TIMEOUT_MS = 10_000;
