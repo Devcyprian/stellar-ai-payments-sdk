@@ -94,3 +94,6 @@ export const NETWORKS = {
     const found = info.balances.find((b) => b.asset === assetStr);
     return found?.balance ?? '0';
   }
+
+export const TESTNET_PASSPHRASE = 'Test SDF Network ; September 2015';
+export const MAINNET_PASSPHRASE = 'Public Global Stellar Network ; September 2015';
