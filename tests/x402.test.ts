@@ -77,3 +77,10 @@ describe('validateMemo', () => {
     expect(validateMemo('a'.repeat(29))).toBe(false);
   });
 });
+
+describe('sponsorship estimateFeeBump', () => {
+  it('handles zero operations', () => {
+    const { estimateFeeBump } = require('../src/sponsorship');
+    expect(estimateFeeBump(0, 100)).toBe(100);
+  });
+});
