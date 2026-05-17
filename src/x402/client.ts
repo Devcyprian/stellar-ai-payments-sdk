@@ -104,3 +104,8 @@ export class X402Client {
 export function backoffMs(attempt: number, baseMs = 200): number {
   return baseMs * Math.pow(2, attempt);
 }
+
+/** Validate memo length (Stellar max 28 bytes). */
+export function validateMemo(memo: string): boolean {
+  return Buffer.byteLength(memo, 'utf8') <= 28;
+}
