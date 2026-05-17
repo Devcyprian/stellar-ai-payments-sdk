@@ -8,3 +8,4 @@ export * from './account';
 export * from './session';
 export * from './sponsorship';
 export * from './version';
+export * from './version';
