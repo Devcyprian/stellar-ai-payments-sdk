@@ -112,3 +112,11 @@ export class SessionKeyManager {
   toJSON(): Array<Omit<SessionKey, 'secretKey'>> {
     return this.listActive().map(({ secretKey: _sk, ...rest }) => rest);
   }
+
+  /** Extend a session key's TTL by additional seconds. */
+  extend(id: string, additionalSeconds: number): boolean {
+    const session = this.store[id];
+    if (!session) return false;
+    session.expiresAt += additionalSeconds * 1000;
+    return true;
+  }
