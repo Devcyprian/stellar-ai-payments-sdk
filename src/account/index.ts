@@ -102,3 +102,11 @@ export const MAINNET_PASSPHRASE = 'Public Global Stellar Network ; September 201
   static minReserve(subentryCount: number): number {
     return (2 + subentryCount) * 0.5;
   }
+
+  /** Get XLM balance or throw with a descriptive error. */
+  async requireXlmBalance(publicKey: string, minBalance: string): Promise<void> {
+    const balance = await this.getXlmBalance(publicKey);
+    if (parseFloat(balance) < parseFloat(minBalance)) {
+      throw new Error(`Insufficient XLM: have ${balance}, need ${minBalance}`);
+    }
+  }
