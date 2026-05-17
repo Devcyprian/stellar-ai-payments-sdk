@@ -65,3 +65,10 @@ describe('SessionKeyManager', () => {
     mgr.extend(key.id, 60);
     expect(mgr.get(key.id)!.expiresAt).toBeGreaterThan(before);
   });
+
+  it('findByLabel returns matching keys', () => {
+    mgr.create({ label: 'agent-1' });
+    mgr.create({ label: 'agent-1' });
+    mgr.create({ label: 'agent-2' });
+    expect(mgr.findByLabel('agent-1')).toHaveLength(2);
+  });
