@@ -102,3 +102,8 @@ export class SessionKeyManager {
     return Object.values(this.store).filter((s) => now <= s.expiresAt);
   }
 }
+
+  /** Count total active session keys. */
+  count(): number {
+    return this.listActive().length;
+  }
