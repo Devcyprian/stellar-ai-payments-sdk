@@ -66,3 +66,14 @@ describe('backoffMs', () => {
     expect(backoffMs(2)).toBe(800);
   });
 });
+
+describe('validateMemo', () => {
+  it('accepts short memo', () => {
+    const { validateMemo } = require('../src/x402/client');
+    expect(validateMemo('hello')).toBe(true);
+  });
+  it('rejects memo over 28 bytes', () => {
+    const { validateMemo } = require('../src/x402/client');
+    expect(validateMemo('a'.repeat(29))).toBe(false);
+  });
+});
