@@ -87,3 +87,10 @@ export const NETWORKS = {
     passphrase: Networks.PUBLIC,
   },
 } as const;
+
+  /** Get balance for a specific asset. */
+  async getAssetBalance(publicKey: string, assetStr: string): Promise<string> {
+    const info = await this.getAccountInfo(publicKey);
+    const found = info.balances.find((b) => b.asset === assetStr);
+    return found?.balance ?? '0';
+  }
