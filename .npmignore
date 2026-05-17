@@ -1,0 +1,7 @@
+tests/
+*.test.ts
+jest.config.js
+.eslintrc.js
+.env*
+CHANGELOG.md
+CONTRIBUTING.md
