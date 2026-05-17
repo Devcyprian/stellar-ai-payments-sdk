@@ -97,3 +97,10 @@ export class X402Client {
     throw new Error(`x402: exceeded ${this.maxRetries} retries`);
   }
 }
+
+/**
+ * Exponential backoff helper for x402 retries.
+ */
+export function backoffMs(attempt: number, baseMs = 200): number {
+  return baseMs * Math.pow(2, attempt);
+}
