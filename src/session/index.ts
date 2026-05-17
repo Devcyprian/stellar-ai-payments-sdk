@@ -120,3 +120,8 @@ export class SessionKeyManager {
     session.expiresAt += additionalSeconds * 1000;
     return true;
   }
+
+  /** Find session keys by label. */
+  findByLabel(label: string): SessionKey[] {
+    return this.listActive().filter((s) => s.options.label === label);
+  }
