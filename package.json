@@ -4,14 +4,25 @@
   "description": "TypeScript SDK for AI agent payments on Stellar — x402 protocol, MPP, session keys, fee sponsorship",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest --coverage",
     "lint": "eslint src tests --ext .ts",
     "prepublishOnly": "npm run lint && npm test && npm run build"
   },
-  "keywords": ["stellar", "soroban", "x402", "ai-payments", "mpp"],
+  "keywords": [
+    "stellar",
+    "soroban",
+    "x402",
+    "ai-payments",
+    "mpp",
+    "soroban",
+    "blockchain",
+    "micropayments"
+  ],
   "author": "Devcyprian",
   "license": "MIT",
   "repository": {
