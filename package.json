@@ -1,0 +1,35 @@
+{
+  "name": "@stellar-ai-payments/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for AI agent payments on Stellar — x402 protocol, MPP, session keys, fee sponsorship",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "lint": "eslint src tests --ext .ts",
+    "prepublishOnly": "npm run lint && npm test && npm run build"
+  },
+  "keywords": ["stellar", "soroban", "x402", "ai-payments", "mpp"],
+  "author": "Devcyprian",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Devcyprian/stellar-ai-payments-sdk.git"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^12.3.0",
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,85 @@
+/**
+ * Multi-Party Payment (MPP) Integration
+ * Splits a payment across multiple Stellar accounts using path payments.
+ */
+import { Networks, TransactionBuilder, Operation, Asset, Keypair, Account } from '@stellar/stellar-sdk';
+
+export interface MppSplit {
+  destination: string;
+  amount: string;       // in XLM or asset units
+  asset?: string;       // defaults to XLM
+}
+
+export interface MppPaymentOptions {
+  sourceKeypair: Keypair;
+  sourceAccount: Account;
+  splits: MppSplit[];
+  networkPassphrase?: string;
+  fee?: string;
+  memo?: string;
+}
+
+export interface MppResult {
+  xdr: string;
+  totalAmount: string;
+  splitCount: number;
+}
+
+/**
+ * Build a multi-party payment transaction XDR.
+ * Each split becomes a separate payment operation in one atomic transaction.
+ */
+export function buildMppTransaction(options: MppPaymentOptions): MppResult {
+  const {
+    sourceKeypair,
+    sourceAccount,
+    splits,
+    networkPassphrase = Networks.TESTNET,
+    fee = '100',
+  } = options;
+
+  const builder = new TransactionBuilder(sourceAccount, {
+    fee,
+    networkPassphrase,
+  });
+
+  let totalAmount = 0;
+
+  for (const split of splits) {
+    const asset = split.asset
+      ? parseAsset(split.asset)
+      : Asset.native();
+
+    builder.addOperation(
+      Operation.payment({
+        destination: split.destination,
+        asset,
+        amount: split.amount,
+      })
+    );
+    totalAmount += parseFloat(split.amount);
+  }
+
+  if (options.memo) {
+    builder.addMemo({ type: 'text', value: options.memo } as Parameters<typeof builder.addMemo>[0]);
+  }
+
+  const tx = builder.setTimeout(30).build();
+  tx.sign(sourceKeypair);
+
+  return {
+    xdr: tx.toXDR(),
+    totalAmount: totalAmount.toFixed(7),
+    splitCount: splits.length,
+  };
+}
+
+/**
+ * Parse "CODE:ISSUER" or "XLM" into a Stellar Asset.
+ */
+export function parseAsset(assetStr: string): Asset {
+  if (assetStr === 'XLM') return Asset.native();
+  const [code, issuer] = assetStr.split(':');
+  if (!issuer) throw new Error(`Invalid asset format: ${assetStr}. Expected "CODE:ISSUER" or "XLM"`);
+  return new Asset(code, issuer);
+}
