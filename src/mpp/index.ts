@@ -102,3 +102,8 @@ export function validateSplits(splits: MppSplit[]): { valid: boolean; errors: st
   }
   return { valid: errors.length === 0, errors };
 }
+
+/** Calculate total fee for an MPP transaction (100 stroops per operation). */
+export function calculateMppFee(splitCount: number, baseFeeStroops = 100): number {
+  return baseFeeStroops * splitCount;
+}
