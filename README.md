@@ -61,3 +61,9 @@ npm test        # Jest with coverage
 npm run lint    # ESLint
 npm run build   # tsc → dist/
 ```
+
+## Security
+
+- Never commit secret keys. Use `.env` files (gitignored).
+- Session keys expire automatically — use short TTLs for agents.
+- Fee-bump sponsors should use dedicated low-balance accounts.
