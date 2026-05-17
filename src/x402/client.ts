@@ -119,3 +119,8 @@ export class X402Error extends Error {
     this.name = 'X402Error';
   }
 }
+
+/** Check if a response content-type is JSON. */
+export function isJsonResponse(contentType: string | undefined): boolean {
+  return (contentType ?? '').includes('application/json');
+}
