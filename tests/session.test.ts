@@ -52,3 +52,9 @@ describe('SessionKeyManager', () => {
     expect(mgr.listActive().length).toBe(2);
   });
 });
+
+  it('count() returns number of active keys', () => {
+    mgr.create();
+    mgr.create();
+    expect(mgr.count()).toBe(2);
+  });
