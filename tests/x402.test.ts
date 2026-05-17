@@ -57,3 +57,12 @@ describe('X402Client', () => {
     });
   });
 });
+
+describe('backoffMs', () => {
+  it('doubles each attempt', () => {
+    const { backoffMs } = require('../src/x402/client');
+    expect(backoffMs(0)).toBe(200);
+    expect(backoffMs(1)).toBe(400);
+    expect(backoffMs(2)).toBe(800);
+  });
+});
