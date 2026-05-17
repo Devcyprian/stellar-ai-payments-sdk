@@ -40,3 +40,12 @@ describe('StellarAccountHelper', () => {
     expect(await helper.accountExists('GNONE')).toBe(false);
   });
 });
+
+describe('StellarAccountHelper.minReserve', () => {
+  it('calculates base reserve', () => {
+    expect(StellarAccountHelper.minReserve(0)).toBe(1);
+  });
+  it('adds 0.5 per subentry', () => {
+    expect(StellarAccountHelper.minReserve(2)).toBe(2);
+  });
+});
