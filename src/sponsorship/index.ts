@@ -60,3 +60,5 @@ export function buildFeeBump(options: FeeBumpOptions): FeeBumpResult {
 export function estimateFeeBump(innerOperationCount: number, baseFee = 100): number {
   return baseFee * (innerOperationCount + 1);
 }
+
+export type { FeeBumpOptions, FeeBumpResult };
