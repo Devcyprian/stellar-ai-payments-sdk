@@ -27,3 +27,16 @@ describe('isValidPublicKey', () => {
     expect(isValidPublicKey('SABC')).toBe(false);
   });
 });
+
+describe('validateSplits', () => {
+  it('returns valid for good splits', () => {
+    const { validateSplits } = require('../src/mpp');
+    const result = validateSplits([{ destination: 'G' + 'A'.repeat(55), amount: '1' }]);
+    expect(result.valid).toBe(true);
+  });
+  it('catches invalid destination', () => {
+    const { validateSplits } = require('../src/mpp');
+    const result = validateSplits([{ destination: 'BAD', amount: '1' }]);
+    expect(result.valid).toBe(false);
+  });
+});
