@@ -97,3 +97,8 @@ export const NETWORKS = {
 
 export const TESTNET_PASSPHRASE = 'Test SDF Network ; September 2015';
 export const MAINNET_PASSPHRASE = 'Public Global Stellar Network ; September 2015';
+
+  /** Minimum XLM reserve for an account (base + subentries). */
+  static minReserve(subentryCount: number): number {
+    return (2 + subentryCount) * 0.5;
+  }
