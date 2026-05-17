@@ -83,3 +83,8 @@ export function parseAsset(assetStr: string): Asset {
   if (!issuer) throw new Error(`Invalid asset format: ${assetStr}. Expected "CODE:ISSUER" or "XLM"`);
   return new Asset(code, issuer);
 }
+
+/** Validate a Stellar public key format. */
+export function isValidPublicKey(key: string): boolean {
+  return /^G[A-Z2-7]{55}$/.test(key);
+}
