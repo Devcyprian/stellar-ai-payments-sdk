@@ -58,3 +58,10 @@ describe('SessionKeyManager', () => {
     mgr.create();
     expect(mgr.count()).toBe(2);
   });
+
+  it('extend() increases expiresAt', () => {
+    const key = mgr.create({ ttlSeconds: 60 });
+    const before = mgr.get(key.id)!.expiresAt;
+    mgr.extend(key.id, 60);
+    expect(mgr.get(key.id)!.expiresAt).toBeGreaterThan(before);
+  });
