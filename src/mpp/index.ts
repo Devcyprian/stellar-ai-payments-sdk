@@ -88,3 +88,17 @@ export function parseAsset(assetStr: string): Asset {
 export function isValidPublicKey(key: string): boolean {
   return /^G[A-Z2-7]{55}$/.test(key);
 }
+
+/** Validate that all split destinations are valid Stellar public keys. */
+export function validateSplits(splits: MppSplit[]): { valid: boolean; errors: string[] } {
+  const errors: string[] = [];
+  for (const s of splits) {
+    if (!isValidPublicKey(s.destination)) {
+      errors.push(`Invalid destination: ${s.destination}`);
+    }
+    if (parseFloat(s.amount) <= 0) {
+      errors.push(`Invalid amount for ${s.destination}: ${s.amount}`);
+    }
+  }
+  return { valid: errors.length === 0, errors };
+}
