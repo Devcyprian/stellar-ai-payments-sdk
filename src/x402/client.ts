@@ -112,3 +112,10 @@ export function validateMemo(memo: string): boolean {
 
 /** Default request timeout in milliseconds. */
 export const DEFAULT_TIMEOUT_MS = 10_000;
+
+export class X402Error extends Error {
+  constructor(public code: string, message: string) {
+    super(message);
+    this.name = 'X402Error';
+  }
+}
