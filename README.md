@@ -1,3 +1,5 @@
+![CI](https://github.com/Devcyprian/stellar-ai-payments-sdk/actions/workflows/ci.yml/badge.svg) ![npm](https://img.shields.io/npm/v/@stellar-ai-payments/sdk)
+
 # @stellar-ai-payments/sdk
 
 TypeScript SDK for AI agent payments on Stellar — x402 protocol, MPP, session keys, fee sponsorship.
