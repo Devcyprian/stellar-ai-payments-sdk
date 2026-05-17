@@ -84,3 +84,12 @@ describe('sponsorship estimateFeeBump', () => {
     expect(estimateFeeBump(0, 100)).toBe(100);
   });
 });
+
+describe('X402Error', () => {
+  it('has correct name and code', () => {
+    const { X402Error } = require('../src/x402/client');
+    const err = new X402Error('PAYMENT_EXPIRED', 'Payment expired');
+    expect(err.name).toBe('X402Error');
+    expect(err.code).toBe('PAYMENT_EXPIRED');
+  });
+});
